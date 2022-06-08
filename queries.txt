@@ -1,0 +1,54 @@
+create table movies(
+    movie_id int primary key auto_increment,
+    name varchar(100) not null default "NO NAME",
+    year DATE not null,
+    description text not null default "NO DESCRIPTION",
+    rating int not null default 0,
+    imageUrl varchar(150) not null default "NO IMAGE",
+    genre int not null default 0,
+    director varchar(100) not null default "NO DIRECTOR"
+);
+
+
+create table users(
+    user_id int primary key auto_increment,
+    username varchar(50) not null unique,
+    password varchar(42) not null
+);
+
+
+//test for addMovie.php
+
+{
+    "movie_name":"test",
+    "year":"2020-05-11",
+    "description":"test",
+    "genre":"5",
+    "director":"test"
+}
+
+create table genre (
+    genre_id int primary key,
+    genre_name varchar(30) not null unique
+);
+
+create table reviews(
+    review_id int primary key auto_increment,
+    movie_id int not null,
+    user_id int not null,
+    reviewText text not null default 'No TEXT',
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (movie_id) REFERENCES movies(movie_id) ON DELETE CASCADE
+);
+
+
+insert into users values(0,'Admin',SHA('12345'));
+
+
+{
+    "name":"test",
+    "year":"0000-00-00",
+    "description":"test",
+    "director":"test",
+    "genre":1
+}
